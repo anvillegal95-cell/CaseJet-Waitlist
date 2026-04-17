@@ -33,7 +33,6 @@ const personalFeatures = [
   "Upload accident or incident reports and supporting medical records in one place.",
   "Receive a factual, plain-English summary of treatment history, diagnoses, providers, and timing.",
   "Use an organized record view to prepare for intake, insurance conversations, or attorney review.",
-  "Built to organize facts only — not to provide legal advice.",
 ];
 
 const attorneyFeatures = [
@@ -298,7 +297,7 @@ export default function Home() {
                   <div>
                     <p className="card-label">For individuals</p>
                     <h3 className="mt-3 max-w-sm font-display text-3xl font-semibold text-white">
-                      Personal Case brings order to reports, records, and treatment history.
+                      <span className="text-[#8ad8ff]">CaseJet.AI</span> brings order to reports, records, and treatment history.
                     </h3>
                     <p className="mt-4 text-base leading-7 text-[#cad7e4]">
                       Upload accident or incident reports plus medical records, then receive a clean factual summary that
