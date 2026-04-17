@@ -152,8 +152,24 @@ export default function Home() {
       </header>
 
       <main id="top">
-        <section className="relative overflow-hidden pb-16 pt-14 sm:pt-20 lg:pb-24 lg:pt-20">
-          <div className="container grid items-start gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-14">
+        <section className="relative overflow-hidden pb-16 pt-14 sm:pt-20 lg:pb-24 lg:pt-20" style={{
+          backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"><rect fill="%23071019" width="1" height="1"/></svg>')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}>
+          <div className="absolute inset-0 -z-10">
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="h-full w-full object-cover"
+              style={{ filter: "brightness(0.5) contrast(1.2)" }}>
+              <source src={metalWaveMotion} type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 bg-gradient-to-b from-[#071019]/70 to-[#071019]/50" />
+          </div>
+          <div className="container grid items-start gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-14 relative z-10">
             <div className="relative z-10 max-w-3xl">
               <span className="section-tag">Coming Soon • Early Access Opening</span>
 
@@ -283,7 +299,7 @@ export default function Home() {
             <div className="grid gap-6 lg:grid-cols-2">
               <article className="case-panel overflow-hidden p-5 sm:p-6">
                 <div className="grid gap-6 xl:grid-cols-[0.92fr_1.08fr] xl:items-center">
-                  <div className="min-h-[300px] rounded-[1.35rem] border border-white/10 overflow-hidden">
+                  <div className="min-h-[500px] rounded-[1.35rem] border border-white/10 overflow-hidden">
                     <video
                       autoPlay
                       muted
@@ -334,7 +350,7 @@ export default function Home() {
                       ))}
                     </ul>
                   </div>
-                  <div className="min-h-[300px] rounded-[1.35rem] border border-white/10 overflow-hidden">
+                  <div className="min-h-[500px] rounded-[1.35rem] border border-white/10 overflow-hidden">
                     <video
                       autoPlay
                       muted
@@ -580,10 +596,10 @@ export default function Home() {
               CaseJet.ai
             </a>
             <a
-              href="tel:+12252222222"
+              href="tel:+16813076412"
               className="inline-flex items-center gap-2 text-[#c9d7e4] transition hover:text-white lg:justify-end">
               <Phone className="h-4 w-4" />
-              Gauthier Amedee, APLC • (225) 222-2222
+              CaseJet • +1 681 307 6412
             </a>
           </div>
         </div>
