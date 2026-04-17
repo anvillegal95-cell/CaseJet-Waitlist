@@ -3,3 +3,7 @@
 - [ ] Update the top ribbon/nav wording so it uses product-focused labeling instead of audience-focused labeling.
 - [ ] Add the provided logo to the top ribbon once the logo asset is present.
 - [ ] Validate the revised landing page visually and save a fresh checkpoint before delivery.
+- [ ] Add the full attorney pricing section with Founder, Solo, and Firm tiers using the provided pricing, feature, badge, and CTA details.
+- [ ] Add the attorney pricing comparison row and the large case add-on note below the pricing cards.
+- [ ] Update the hero headline copy to remove "case-ready" and keep "Intelligence" capitalized.
+- [ ] Validate the updated pricing layout and headline in the live preview, then push and checkpoint the changes.

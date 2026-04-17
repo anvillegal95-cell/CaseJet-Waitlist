@@ -49,9 +49,56 @@ const personalPlans = [
 ];
 
 const attorneyPlans = [
-  { name: "Founder", detail: "Early access for forward-leaning firms" },
-  { name: "Solo", detail: "Built for lean plaintiff practices" },
-  { name: "Firm", detail: "For teams standardizing drafting and review" },
+  {
+    name: "Founder",
+    price: "$79",
+    cadence: "/month",
+    credits: "15 credits/month",
+    effectiveRate: "$5.27 per letter effective rate",
+    badge: "Most Popular",
+    features: [
+      "Up to 15 demand letters/month",
+      "Full AI medical extraction",
+      "Defense risk analysis",
+      "Style library mirroring",
+      "Monthly rollover credits",
+      "Limited to the first 30 subscribers",
+    ],
+    cta: "Start Founder Plan",
+  },
+  {
+    name: "Solo",
+    price: "$149",
+    cadence: "/month",
+    credits: "15 credits/month",
+    effectiveRate: "$9.93 per letter effective rate",
+    features: [
+      "Up to 15 demand letters/month",
+      "Full AI medical extraction",
+      "Defense risk analysis",
+      "Style library mirroring",
+      "Monthly rollover credits",
+      "Large case add-on available at +$16/letter",
+    ],
+    cta: "Start Solo Plan",
+  },
+  {
+    name: "Firm",
+    price: "$299",
+    cadence: "/month",
+    credits: "40 credits/month",
+    effectiveRate: "$7.47 per letter effective rate",
+    features: [
+      "Up to 40 demand letters/month",
+      "Full AI medical extraction",
+      "Defense risk analysis",
+      "Style library mirroring",
+      "Monthly rollover credits",
+      "Large case add-on included",
+      "Multi-attorney access up to 5",
+    ],
+    cta: "Start Firm Plan",
+  },
 ];
 
 export default function Home() {
@@ -237,7 +284,7 @@ export default function Home() {
                       <div className="case-panel-soft max-w-sm p-5">
                         <p className="card-label">Platform signal</p>
                         <p className="mt-3 font-display text-2xl font-semibold text-white">
-                          From intake file chaos to structured case-ready intelligence.
+                          From intake file chaos to structured Intelligence.
                         </p>
                         <div className="divider-fade my-4" />
                         <div className="grid grid-cols-2 gap-3 text-sm text-[#d5dfeb]">
@@ -368,25 +415,23 @@ export default function Home() {
         </section>
 
         <section id="pricing" className="pb-12 pt-6 lg:pt-10">
-          <div className="container grid gap-6 xl:grid-cols-[0.85fr_1.15fr]">
+          <div className="container space-y-6">
             <div className="case-panel p-6 sm:p-7">
               <span className="section-tag">Launch pricing signal</span>
-              <h2 className="mt-6 max-w-xl text-3xl font-semibold text-white sm:text-4xl">
-                Clear starting tiers for Personal Case, and an early-access track for firms.
+              <h2 className="mt-6 max-w-3xl text-3xl font-semibold text-white sm:text-4xl">
+                Clear starting tiers for Personal Case, plus attorney plans priced to undercut legacy demand-letter economics.
               </h2>
-              <p className="mt-4 max-w-xl text-base leading-7 text-[#cad8e6]">
-                CaseJet is designed to feel accessible for individuals while remaining serious enough for professional
-                litigation workflows. Personal Case pricing is already defined. Attorney access will open through a
-                staged rollout beginning with the founder cohort.
+              <p className="mt-4 max-w-3xl text-base leading-7 text-[#cad8e6]">
+                CaseJet keeps Personal Case accessible for individuals while giving plaintiff firms a clear path into extraction,
+                defense-risk analysis, and demand drafting. The attorney lineup now reflects the same pricing structure shown in the main product.
               </p>
               <div className="divider-fade my-6" />
               <div className="rounded-[1.2rem] border border-[#f1c97b]/16 bg-[#f1c97b]/6 p-4 text-sm leading-6 text-[#f5dfb6]">
-                Join the waitlist to receive launch timing, attorney onboarding details, and first access to product
-                updates as CaseJet.ai moves toward release.
+                Join the waitlist to receive launch timing, attorney onboarding details, and first access to product updates as CaseJet.ai moves toward release.
               </div>
             </div>
 
-            <div className="grid gap-6 lg:grid-cols-2">
+            <div className="grid gap-6 xl:grid-cols-[0.78fr_1.22fr]">
               <div className="case-panel p-6 sm:p-7">
                 <p className="card-label">Personal Case</p>
                 <div className="mt-5 space-y-4">
@@ -407,22 +452,98 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="case-panel p-6 sm:p-7">
-                <p className="card-label">Attorney product</p>
-                <div className="mt-5 space-y-4">
-                  {attorneyPlans.map((plan) => (
-                    <div key={plan.name} className="case-panel-soft p-4">
-                      <div className="flex items-center justify-between gap-4">
-                        <div>
-                          <h3 className="font-display text-xl font-semibold text-white">{plan.name}</h3>
-                          <p className="mt-1 text-sm text-[#c5d3e2]">{plan.detail}</p>
-                        </div>
-                        <span className="rounded-full border border-[#7dcfff]/18 bg-[#7dcfff]/8 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#bceaff]">
-                          Coming soon
-                        </span>
-                      </div>
+              <div className="space-y-5">
+                <div className="grid gap-3 md:grid-cols-3">
+                  <div className="case-panel-soft p-4">
+                    <p className="card-label">Typical competitor rate</p>
+                    <p className="mt-2 font-display text-2xl font-semibold text-white">$250</p>
+                    <p className="mt-1 text-sm text-[#c9d7e4]">per demand letter</p>
+                  </div>
+                  <div className="case-panel-soft border-[#7dd0ff]/24 bg-[#0a1e2c]/92 p-4">
+                    <p className="card-label text-[#8fdcff]">Founder-plan effective rate</p>
+                    <p className="mt-2 font-display text-2xl font-semibold text-[#9ae2ff]">$5.27</p>
+                    <p className="mt-1 text-sm text-[#d4e7f5]">per letter</p>
+                  </div>
+                  <div className="case-panel-soft border-[#f1c97b]/22 bg-[#1a160f]/92 p-4">
+                    <p className="card-label text-[#f1c97b]">Firm-plan effective rate</p>
+                    <p className="mt-2 font-display text-2xl font-semibold text-[#f6d598]">$7.48</p>
+                    <p className="mt-1 text-sm text-[#e8d7b6]">per letter</p>
+                  </div>
+                </div>
+
+                <div className="case-panel p-6 sm:p-7">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                    <div>
+                      <p className="card-label">Attorney pricing</p>
+                      <h3 className="mt-2 font-display text-2xl font-semibold text-white sm:text-3xl">
+                        Founder, Solo, and Firm tiers for plaintiff practices.
+                      </h3>
                     </div>
-                  ))}
+                    <p className="max-w-xl text-sm leading-6 text-[#c8d5e3]">
+                      Every plan includes full AI medical extraction, defense-risk analysis, style mirroring, and rollover credits.
+                    </p>
+                  </div>
+
+                  <div className="mt-6 grid gap-5 xl:grid-cols-3">
+                    {attorneyPlans.map((plan) => (
+                      <div
+                        key={plan.name}
+                        className={`relative rounded-[1.5rem] border p-5 shadow-[0_18px_45px_rgba(0,0,0,0.24)] ${
+                          plan.badge
+                            ? "border-[#f1c97b]/28 bg-[linear-gradient(180deg,rgba(31,25,16,0.94),rgba(9,16,24,0.96))]"
+                            : "border-white/10 bg-[linear-gradient(180deg,rgba(12,19,28,0.96),rgba(8,13,20,0.98))]"
+                        }`}>
+                        {plan.badge ? (
+                          <span className="absolute right-5 top-5 rounded-full border border-[#f1c97b]/28 bg-[#f1c97b]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f6d598]">
+                            {plan.badge}
+                          </span>
+                        ) : null}
+
+                        <div className="pr-24">
+                          <p className="card-label">{plan.name}</p>
+                          <p className="mt-3 font-display text-4xl font-semibold text-white">{plan.price}</p>
+                          <p className="mt-1 text-xs uppercase tracking-[0.18em] text-[#98afc5]">{plan.cadence}</p>
+                        </div>
+
+                        <div className="mt-5 grid gap-3 rounded-[1.1rem] border border-white/8 bg-white/[0.03] p-4">
+                          <div>
+                            <p className="card-label">Credits</p>
+                            <p className="mt-1 text-sm text-white">{plan.credits}</p>
+                          </div>
+                          <div>
+                            <p className="card-label">Effective rate</p>
+                            <p className="mt-1 text-sm text-[#8fdcff]">{plan.effectiveRate}</p>
+                          </div>
+                        </div>
+
+                        <ul className="feature-list mt-5 space-y-3 text-sm leading-6 text-[#dce7f3]">
+                          {plan.features.map((feature) => (
+                            <li key={feature}>{feature}</li>
+                          ))}
+                        </ul>
+
+                        <div className="mt-6">
+                          <button
+                            type="button"
+                            className={`inline-flex w-full items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition hover:-translate-y-0.5 ${
+                              plan.badge
+                                ? "bg-[linear-gradient(135deg,#f1c97b,#c59d4e)] text-[#16120b]"
+                                : "metal-button"
+                            }`}>
+                            {plan.cta}
+                          </button>
+                          <p className="mt-2 text-center text-xs uppercase tracking-[0.18em] text-[#9cb3c8]">
+                            Stripe billing coming soon
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="rounded-[1.3rem] border border-[#7dd0ff]/14 bg-[#09131d]/92 px-5 py-4 text-sm leading-6 text-[#d3e4f2]">
+                  <span className="font-semibold uppercase tracking-[0.16em] text-[#f1c97b]">Large Case Add-On:</span>{" "}
+                  Process up to 1,500 pages for $16 per letter.
                 </div>
               </div>
             </div>
