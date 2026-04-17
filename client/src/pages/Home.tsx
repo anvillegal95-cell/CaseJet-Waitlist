@@ -225,8 +225,8 @@ export default function Home() {
                   AI-powered case organization for consumers and plaintiff firms
                 </p>
                 <h1 className="max-w-3xl text-5xl font-semibold leading-[0.95] text-white sm:text-6xl lg:text-7xl">
-                  Case intelligence,
-                  <span className="block text-[#8ad8ff]">organized before the argument starts.</span>
+                  CaseJet,
+                  <span className="block text-[#8ad8ff]">a tool kit to organize before they do.</span>
                 </h1>
                 <p className="max-w-2xl text-lg leading-8 text-[#cad6e4] sm:text-xl">
                   <strong className="font-semibold text-white">CaseJet</strong> turns raw reports, medical records,
