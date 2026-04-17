@@ -222,7 +222,7 @@ export default function Home() {
 
               <div className="mt-7 space-y-6">
                 <p className="max-w-xl text-sm uppercase tracking-[0.32em] text-[#88b5df]">
-                  AI-powered case organization for consumers and plaintiff firms
+                  AI-powered organization for consumers and plaintiff firms
                 </p>
                 <h1 className="max-w-3xl text-5xl font-semibold leading-[0.95] text-white sm:text-6xl lg:text-7xl">
                   CaseJet,
