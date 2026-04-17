@@ -3,7 +3,7 @@
 import { FormEvent, useMemo, useState } from "react";
 import { ArrowRight, Globe, Phone } from "lucide-react";
 
-type Interest = "Personal Case" | "Attorney";
+type Interest = "Personal Intelligence Tool" | "Attorney";
 
 type FormState = {
   fullName: string;
@@ -105,7 +105,7 @@ export default function Home() {
   const [form, setForm] = useState<FormState>({
     fullName: "",
     email: "",
-    interest: "Personal Case",
+    interest: "Personal Intelligence Tool",
     website: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -114,7 +114,7 @@ export default function Home() {
   );
 
   const teaserLabel = useMemo(
-    () => (form.interest === "Attorney" ? "Attorney early access queue" : "Personal Case launch queue"),
+    () => (form.interest === "Attorney" ? "Attorney early access queue" : "Personal Intelligence Tool launch queue"),
     [form.interest],
   );
 
@@ -251,7 +251,7 @@ export default function Home() {
                   <ArrowRight className="h-4 w-4" />
                 </a>
                 <p className="max-w-xl text-sm leading-6 text-[#9fb2c8]">
-                  Launch access will roll out in waves for <span className="text-white">Personal Case</span> users and
+                  Launch access will roll out in waves for <span className="text-white">Personal Intelligence Tool</span> users and
                   <span className="text-white"> attorney teams</span>. Join now to receive release updates and onboarding
                   details first.
                 </p>
@@ -290,7 +290,7 @@ export default function Home() {
                         <div className="grid grid-cols-2 gap-3 text-sm text-[#d5dfeb]">
                           <div>
                             <p className="card-label">Paths</p>
-                            <p className="mt-1 text-white">Personal Case + Attorney</p>
+                            <p className="mt-1 text-white">Personal Intelligence Tool + Attorney</p>
                           </div>
                           <div>
                             <p className="card-label">Launch posture</p>
@@ -326,7 +326,7 @@ export default function Home() {
                 </div>
                 <div className="grid gap-3 text-sm leading-7 text-[#d6e1ec] sm:grid-cols-3">
                   <div className="case-panel-soft p-4">
-                    Personal Case summaries that organize treatment history without giving legal advice.
+                    Personal Intelligence Tool summaries that organize treatment history without giving legal advice.
                   </div>
                   <div className="case-panel-soft p-4">
                     Attorney workflows for extraction, analysis, and demand drafting in the firm’s own voice.
@@ -419,10 +419,10 @@ export default function Home() {
             <div className="case-panel p-6 sm:p-7">
               <span className="section-tag">Launch pricing signal</span>
               <h2 className="mt-6 max-w-3xl text-3xl font-semibold text-white sm:text-4xl">
-                Clear starting tiers for Personal Case, plus attorney plans priced to undercut legacy demand-letter economics.
+                Clear starting tiers for Personal Intelligence Tool, plus attorney plans priced to undercut legacy demand-letter economics.
               </h2>
               <p className="mt-4 max-w-3xl text-base leading-7 text-[#cad8e6]">
-                CaseJet keeps Personal Case accessible for individuals while giving plaintiff firms a clear path into extraction,
+                CaseJet keeps Personal Intelligence Tool accessible for individuals while giving plaintiff firms a clear path into extraction,
                 defense-risk analysis, and demand drafting. The attorney lineup now reflects the same pricing structure shown in the main product.
               </p>
               <div className="divider-fade my-6" />
@@ -433,7 +433,7 @@ export default function Home() {
 
             <div className="grid gap-6 xl:grid-cols-[0.78fr_1.22fr]">
               <div className="case-panel p-6 sm:p-7">
-                <p className="card-label">Personal Case</p>
+                <p className="card-label">Personal Intelligence Tool</p>
                 <div className="mt-5 space-y-4">
                   {personalPlans.map((plan) => (
                     <div key={plan.name} className="case-panel-soft p-4">
@@ -591,7 +591,7 @@ export default function Home() {
                     <div>
                       <p className="card-label">Interested in</p>
                       <div className="mt-3 grid grid-cols-2 gap-3">
-                        {(["Personal Case", "Attorney"] as Interest[]).map((option) => {
+                        {(["Personal Intelligence Tool", "Attorney"] as Interest[]).map((option) => {
                           const active = form.interest === option;
                           return (
                             <button
@@ -609,7 +609,7 @@ export default function Home() {
                                   active ? "text-[#d8ebf8]" : "text-[#97a9bc]"
                                 }`}>
 
-                                {option === "Personal Case"
+                                {option === "Personal Intelligence Tool"
                                   ? "For individuals organizing reports and treatment records."
                                   : "For plaintiff firms building extraction and drafting workflows."}
                               </span>
