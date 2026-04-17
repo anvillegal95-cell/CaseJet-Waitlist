@@ -14,14 +14,14 @@ type FormState = {
 
 const waitlistEndpoint = import.meta.env.VITE_WAITLIST_ENDPOINT?.trim() ?? "";
 
-const heroImage =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663460816240/Zhq7bxm5unVRwkDMeRwjdX/casejet-hero-forensic-futurism-SXJsEFpLasaWUT76vWxYPf.webp";
-const personalImage =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663460816240/Zhq7bxm5unVRwkDMeRwjdX/casejet-personal-case-visual-iFzxxKQaBZBkRRPj25CNP6.webp";
-const attorneyImage =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663460816240/Zhq7bxm5unVRwkDMeRwjdX/casejet-attorney-visual-KdtVRNXtTve6n3dA7jDkCW.webp";
-const launchTexture =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663460816240/Zhq7bxm5unVRwkDMeRwjdX/casejet-launch-texture-PKznAtjtN4Qf2tcycXPzqQ.webp";
+const logoUrl =
+  "https://d2xsxph8kpxj0f.cloudfront.net/310519663460816240/Zhq7bxm5unVRwkDMeRwjdX/Alter_the_color_scheme_to_inco_Nano_Banana_2_60586_f16e9bea.jpg";
+const cockpitGridMotion =
+  "https://d2xsxph8kpxj0f.cloudfront.net/310519663460816240/Zhq7bxm5unVRwkDMeRwjdX/casejet-cockpit-grid-loop_f73c36a4.mp4";
+const metalWaveMotion =
+  "https://d2xsxph8kpxj0f.cloudfront.net/310519663460816240/Zhq7bxm5unVRwkDMeRwjdX/casejet-metal-wave-loop_6db7d856.mp4";
+const cyanCoreMotion =
+  "https://d2xsxph8kpxj0f.cloudfront.net/310519663460816240/Zhq7bxm5unVRwkDMeRwjdX/casejet-cyan-core-loop_48b5269f.mp4";
 
 const commandStrip = [
   "Plain-English treatment timelines",
@@ -128,20 +128,12 @@ export default function Home() {
       <header className="sticky top-0 z-40 border-b border-white/8 bg-[#071019]/70 backdrop-blur-xl">
         <div className="container flex items-center justify-between gap-4 py-4">
           <a href="#top" className="flex items-center gap-3 text-sm text-white/90 transition hover:text-white">
-            <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-[#7dc9ff]/20 bg-white/5 font-display text-lg font-semibold text-white shadow-[0_10px_30px_rgba(0,0,0,0.25)]">
-              CJ
-            </span>
-            <span>
-              <span className="block font-display text-base font-semibold tracking-[0.08em] text-white">
-                CaseJet Legal Tech
-              </span>
-              <span className="block text-xs uppercase tracking-[0.22em] text-[#8bb3dd]">CaseJet.ai</span>
-            </span>
+            <img src={logoUrl} alt="CaseJet" className="h-10 w-auto" />
           </a>
 
           <nav className="hidden items-center gap-6 text-sm text-[#b8c8db] md:flex">
-            <a href="#audiences" className="transition hover:text-white">
-              Audiences
+            <a href="#products" className="transition hover:text-white">
+              Products
             </a>
             <a href="#pricing" className="transition hover:text-white">
               Pricing
@@ -207,8 +199,16 @@ export default function Home() {
             <div className="relative lg:pt-8">
               <div className="case-panel soft-noise overflow-hidden p-4 sm:p-5">
                 <div
-                  className="relative min-h-[470px] rounded-[1.35rem] border border-white/10 bg-[#09131d] bg-cover bg-center shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)]"
-                  style={{ backgroundImage: `linear-gradient(180deg, rgba(5,10,17,0.22), rgba(5,10,17,0.86)), url(${heroImage})` }}>
+                  className="relative min-h-[470px] rounded-[1.35rem] border border-white/10 bg-[#09131d] bg-cover bg-center shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)]">
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="absolute inset-0 h-full w-full rounded-[1.35rem] object-cover"
+                    style={{ filter: "brightness(0.6) contrast(1.1)" }}>
+                    <source src={metalWaveMotion} type="video/mp4" />
+                  </video>
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(131,216,255,0.18),transparent_28%),radial-gradient(circle_at_bottom_left,rgba(255,214,125,0.12),transparent_20%)]" />
                   <div className="relative flex min-h-[470px] flex-col justify-between p-6 sm:p-8">
                     <div className="flex items-start justify-between gap-4">
@@ -278,16 +278,23 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="audiences" className="pb-10 pt-8 lg:pt-12">
+        <section id="products" className="pb-10 pt-8 lg:pt-12">
           <div className="container space-y-6">
-            <span className="section-tag">Audience paths</span>
+            <span className="section-tag">Product paths</span>
             <div className="grid gap-6 lg:grid-cols-2">
               <article className="case-panel overflow-hidden p-5 sm:p-6">
                 <div className="grid gap-6 xl:grid-cols-[0.92fr_1.08fr] xl:items-center">
-                  <div
-                    className="min-h-[300px] rounded-[1.35rem] border border-white/10 bg-cover bg-center"
-                    style={{ backgroundImage: `linear-gradient(180deg, rgba(5,10,17,0.1), rgba(5,10,17,0.48)), url(${personalImage})` }}
-                  />
+                  <div className="min-h-[300px] rounded-[1.35rem] border border-white/10 overflow-hidden">
+                    <video
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="h-full w-full object-cover"
+                      style={{ filter: "brightness(0.7) contrast(1.15)" }}>
+                      <source src={cockpitGridMotion} type="video/mp4" />
+                    </video>
+                  </div>
                   <div>
                     <p className="card-label">For individuals</p>
                     <h3 className="mt-3 max-w-sm font-display text-3xl font-semibold text-white">
@@ -328,10 +335,17 @@ export default function Home() {
                       ))}
                     </ul>
                   </div>
-                  <div
-                    className="min-h-[300px] rounded-[1.35rem] border border-white/10 bg-cover bg-center"
-                    style={{ backgroundImage: `linear-gradient(180deg, rgba(5,10,17,0.18), rgba(5,10,17,0.52)), url(${attorneyImage})` }}
-                  />
+                  <div className="min-h-[300px] rounded-[1.35rem] border border-white/10 overflow-hidden">
+                    <video
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="h-full w-full object-cover"
+                      style={{ filter: "brightness(0.7) contrast(1.15)" }}>
+                      <source src={cyanCoreMotion} type="video/mp4" />
+                    </video>
+                  </div>
                 </div>
               </article>
             </div>
@@ -406,7 +420,7 @@ export default function Home() {
               <div className="grid gap-0 lg:grid-cols-[0.96fr_1.04fr]">
                 <div
                   className="relative overflow-hidden border-b border-white/8 p-6 sm:p-8 lg:border-b-0 lg:border-r"
-                  style={{ backgroundImage: `linear-gradient(180deg, rgba(7,12,18,0.8), rgba(7,12,18,0.92)), url(${launchTexture})`, backgroundSize: "cover", backgroundPosition: "center" }}>
+                  style={{ backgroundImage: `linear-gradient(180deg, rgba(7,12,18,0.8), rgba(7,12,18,0.92))`, backgroundSize: "cover", backgroundPosition: "center" }}>
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(79,190,255,0.16),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(255,214,125,0.12),transparent_24%)]" />
                   <div className="relative max-w-xl">
                     <span className="section-tag">Join the waitlist</span>
@@ -551,6 +565,7 @@ export default function Home() {
       <footer className="border-t border-white/8 bg-[#060c12]/80 py-8">
         <div className="container grid gap-6 text-sm text-[#b9c8d8] lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
+            <img src={logoUrl} alt="CaseJet" className="h-8 w-auto mb-3" />
             <p className="font-display text-xl font-semibold text-white">CaseJet Legal Tech</p>
             <p className="mt-2 max-w-2xl leading-7 text-[#c4d3e2]">
               Launching soon at <span className="text-white">CaseJet.ai</span> with factual organization for

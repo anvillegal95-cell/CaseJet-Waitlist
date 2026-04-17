@@ -1,0 +1,5 @@
+- [ ] Review the uploaded motion assets and verify whether the logo file is available in the workspace.
+- [ ] Replace or augment the current hero and key visual areas with the provided looping product motion assets.
+- [ ] Update the top ribbon/nav wording so it uses product-focused labeling instead of audience-focused labeling.
+- [ ] Add the provided logo to the top ribbon once the logo asset is present.
+- [ ] Validate the revised landing page visually and save a fresh checkpoint before delivery.
