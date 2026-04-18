@@ -13,6 +13,8 @@ type FormState = {
   website: string;
 };
 
+// Google Apps Script Web App endpoint — appends submissions to the CaseJet waitlist sheet.
+// The value is read from VITE_WAITLIST_ENDPOINT at build time so it can be rotated without a code change.
 const waitlistEndpoint = import.meta.env.VITE_WAITLIST_ENDPOINT?.trim() ?? "";
 
 const logoUrl =
@@ -152,14 +154,20 @@ export default function Home() {
       setIsSubmitting(true);
       setFeedback(null);
 
-      const payload = new URLSearchParams({
-        fullName: form.fullName,
-        email: form.email,
-        interest: form.interest,
-        source: "CaseJet.ai waitlist",
-        submittedAt: new Date().toISOString(),
-      });
+      // Build FormData directly from the form element so every input with a `name`
+      // attribute is forwarded. The Apps Script auto-creates a column per field name,
+      // so adding a new <input name="..."> on the front end requires zero backend work.
+      const payload = new FormData(event.currentTarget);
 
+      // Attach fields that aren't rendered as HTML inputs (interest is state-driven
+      // via the segmented buttons, and source/submittedAt are useful metadata).
+      payload.set("interest", form.interest);
+      payload.set("source", "CaseJet.ai waitlist");
+      payload.set("submittedAt", new Date().toISOString());
+
+      // mode: "no-cors" avoids the CORS preflight that Apps Script endpoints reject.
+      // The response is opaque as a result, so if fetch resolves we treat it as success —
+      // the Apps Script still writes the row regardless.
       await fetch(waitlistEndpoint, {
         method: "POST",
         mode: "no-cors",
