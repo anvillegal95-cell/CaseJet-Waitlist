@@ -156,8 +156,9 @@ export default function Home() {
         fullName: form.fullName,
         email: form.email,
         interest: form.interest,
-        source: "CaseJet.ai waitlist",
+        source: "CaseJet.ai pre-registration",
         submittedAt: new Date().toISOString(),
+        userAgent: typeof navigator !== "undefined" ? navigator.userAgent : "",
       });
 
       await fetch(waitlistEndpoint, {
