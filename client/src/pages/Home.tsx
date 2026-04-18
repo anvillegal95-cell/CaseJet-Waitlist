@@ -499,22 +499,22 @@ export default function Home() {
                     </p>
                   </div>
 
-                  <div className="mt-6 grid gap-5 xl:grid-cols-3">
+                  <div className="mt-8 grid gap-5 xl:grid-cols-3">
                     {attorneyPlans.map((plan) => (
                       <div
                         key={plan.name}
-                        className={`relative rounded-[1.5rem] border p-5 shadow-[0_18px_45px_rgba(0,0,0,0.24)] ${
+                        className={`relative rounded-[1.5rem] border shadow-[0_18px_45px_rgba(0,0,0,0.24)] ${
                           plan.badge
-                            ? "border-[#f1c97b]/28 bg-[linear-gradient(180deg,rgba(31,25,16,0.94),rgba(9,16,24,0.96))]"
-                            : "border-white/10 bg-[linear-gradient(180deg,rgba(12,19,28,0.96),rgba(8,13,20,0.98))]"
+                            ? "border-[#f1c97b]/28 bg-[linear-gradient(180deg,rgba(31,25,16,0.94),rgba(9,16,24,0.96))] p-5 pt-8"
+                            : "border-white/10 bg-[linear-gradient(180deg,rgba(12,19,28,0.96),rgba(8,13,20,0.98))] p-5"
                         }`}>
                         {plan.badge ? (
-                          <span className="absolute right-5 top-5 rounded-full border border-[#f1c97b]/28 bg-[#f1c97b]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f6d598]">
+                          <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border border-[#f1c97b]/40 bg-[linear-gradient(135deg,#f1c97b,#c59d4e)] px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#16120b] shadow-[0_8px_20px_rgba(241,201,123,0.28)]">
                             {plan.badge}
                           </span>
                         ) : null}
 
-                        <div className="pr-24">
+                        <div>
                           <p className="card-label">{plan.name}</p>
                           <p className="mt-3 font-display text-4xl font-semibold text-white">{plan.price}</p>
                           <p className="mt-1 text-xs uppercase tracking-[0.18em] text-[#98afc5]">{plan.cadence}</p>
