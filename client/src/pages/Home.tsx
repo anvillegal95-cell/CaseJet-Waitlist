@@ -1,7 +1,8 @@
 // Design philosophy: Forensic Futurism — this page should feel like a premium legal-tech control room,
 // with asymmetrical storytelling, evidence-board structure, and restrained, high-credibility motion.
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import { ArrowRight, Globe, Phone } from "lucide-react";
+import HeroIntro, { shouldPlayIntro } from "@/components/HeroIntro";
 
 type Interest = "Personal Intelligence Tool" | "Attorney";
 
@@ -113,6 +114,19 @@ export default function Home() {
     null,
   );
 
+  // Hero intro overlay — plays once per session and fades into the landing page.
+  const [introVisible, setIntroVisible] = useState<boolean>(() => shouldPlayIntro());
+
+  // Lock scroll while the intro is playing so the page underneath stays anchored.
+  useEffect(() => {
+    if (!introVisible) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [introVisible]);
+
   const teaserLabel = useMemo(
     () => (form.interest === "Attorney" ? "Attorney early access queue" : "Personal Intelligence Tool launch queue"),
     [form.interest],
@@ -171,6 +185,7 @@ export default function Home() {
 
   return (
     <div className="page-shell min-h-screen text-foreground">
+      {introVisible ? <HeroIntro onFinish={() => setIntroVisible(false)} /> : null}
       <header className="sticky top-0 z-40 border-b border-white/8 bg-[#071019]/70 backdrop-blur-xl">
         <div className="container flex items-center justify-between gap-4 py-4">
           <a href="#top" className="flex items-center gap-3 text-sm text-white/90 transition hover:text-white">
