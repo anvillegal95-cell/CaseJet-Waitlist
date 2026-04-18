@@ -1,20 +1,20 @@
 // Design philosophy: Forensic Futurism — the intro overlay should feel cinematic but disciplined,
-// playing the CaseJet jet-streak logo animation with audio before the user lands in the control room.
+// playing the CaseJet jet-streak logo animation silently on arrival before fading into the control room.
+//
+// Note: the video is intentionally muted. Muted autoplay is universally allowed across browsers,
+// which lets the animation run instantly on arrival with zero user interaction required.
 import { useEffect, useRef, useState } from "react";
 
 const INTRO_SESSION_KEY = "casejet:intro-played";
 
 type HeroIntroProps = {
-  /** When the intro has finished (ended, skipped, or suppressed), fire this callback. */
+  /** When the intro has finished (ended, skipped, or errored), fire this callback. */
   onFinish: () => void;
-  /** Force-play the intro regardless of session storage (useful for dev/testing). */
-  forcePlay?: boolean;
 };
 
-export default function HeroIntro({ onFinish, forcePlay = false }: HeroIntroProps) {
+export default function HeroIntro({ onFinish }: HeroIntroProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isExiting, setIsExiting] = useState(false);
-  const [needsTapToPlay, setNeedsTapToPlay] = useState(false);
   const finishedRef = useRef(false);
 
   // Kick off the fade-out, then invoke onFinish after the transition completes.
@@ -29,7 +29,7 @@ export default function HeroIntro({ onFinish, forcePlay = false }: HeroIntroProp
       // sessionStorage may be disabled; that's fine, the intro will just replay.
     }
 
-    // If the video was cut short by an error, skip the fade to avoid stalling.
+    // If the video errored out, skip the fade to avoid stalling on a blank overlay.
     if (reason === "error") {
       onFinish();
       return;
@@ -41,26 +41,19 @@ export default function HeroIntro({ onFinish, forcePlay = false }: HeroIntroProp
     }, 650);
   }
 
-  // Try to autoplay with audio. Browsers (especially Safari/iOS) often block sound
-  // autoplay without a user gesture, so fall back to a "tap to play" prompt.
+  // Belt-and-suspenders: explicitly call play() once mounted. autoPlay + muted + playsInline
+  // is the browser-supported combination for silent autoplay on arrival across desktop and mobile.
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-
-    video.muted = false;
-    video.volume = 0.9;
-
+    video.muted = true;
     const playPromise = video.play();
-    if (playPromise && typeof playPromise.then === "function") {
-      playPromise.catch(() => {
-        // Autoplay with sound was blocked. Show the tap prompt; the click handler
-        // on the overlay will start playback with audio after the user gesture.
-        setNeedsTapToPlay(true);
-      });
+    if (playPromise && typeof playPromise.catch === "function") {
+      playPromise.catch(() => finish("error"));
     }
   }, []);
 
-  // Allow users to hit Escape to skip the intro.
+  // Allow users to hit Escape / Enter / Space to skip the intro.
   useEffect(() => {
     function handleKey(event: KeyboardEvent) {
       if (event.key === "Escape" || event.key === "Enter" || event.key === " ") {
@@ -71,34 +64,6 @@ export default function HeroIntro({ onFinish, forcePlay = false }: HeroIntroProp
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
   }, []);
-
-  function handleTapToPlay() {
-    const video = videoRef.current;
-    if (!video) {
-      finish("skipped");
-      return;
-    }
-    video.muted = false;
-    video.play()
-      .then(() => setNeedsTapToPlay(false))
-      .catch(() => {
-        // If unmuted play still fails, start muted so the animation at least runs.
-        video.muted = true;
-        video.play().catch(() => finish("error"));
-        setNeedsTapToPlay(false);
-      });
-  }
-
-  // Force-play support: clear the session key so the effect below triggers fresh playback.
-  useEffect(() => {
-    if (forcePlay) {
-      try {
-        sessionStorage.removeItem(INTRO_SESSION_KEY);
-      } catch {
-        // no-op
-      }
-    }
-  }, [forcePlay]);
 
   return (
     <div
@@ -114,6 +79,7 @@ export default function HeroIntro({ onFinish, forcePlay = false }: HeroIntroProp
         src="/casejet-hero-intro.mp4"
         poster="/casejet-hero-intro-poster.jpg"
         autoPlay
+        muted
         playsInline
         preload="auto"
         onEnded={() => finish("ended")}
@@ -125,28 +91,6 @@ export default function HeroIntro({ onFinish, forcePlay = false }: HeroIntroProp
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_55%,rgba(4,9,14,0.55)_100%)]"
       />
-
-      {/* Tap-to-play prompt shown only when autoplay-with-sound is blocked. */}
-      {needsTapToPlay ? (
-        <button
-          type="button"
-          onClick={handleTapToPlay}
-          className="absolute inset-0 flex items-center justify-center bg-[#04090e]/55 text-white backdrop-blur-sm">
-          <span className="flex flex-col items-center gap-3">
-            <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/30 bg-white/5 transition hover:bg-white/10">
-              <svg
-                viewBox="0 0 24 24"
-                className="h-7 w-7 translate-x-0.5 fill-white"
-                aria-hidden="true">
-                <path d="M8 5.14v13.72a1 1 0 0 0 1.52.86l11.14-6.86a1 1 0 0 0 0-1.72L9.52 4.28A1 1 0 0 0 8 5.14z" />
-              </svg>
-            </span>
-            <span className="text-sm font-semibold uppercase tracking-[0.3em] text-[#cad8e6]">
-              Tap to enter CaseJet
-            </span>
-          </span>
-        </button>
-      ) : null}
 
       {/* Skip button — always available so users are never trapped in the intro. */}
       <button
