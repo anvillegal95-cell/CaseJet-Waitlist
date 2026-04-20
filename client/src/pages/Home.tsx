@@ -1,4 +1,4 @@
-// Design philosophy: Forensic Futurism — this page should feel like a premium legal-tech control room,
+// Design philosophy: Forensic Futurism - this page should feel like a premium legal-tech control room,
 // with asymmetrical storytelling, evidence-board structure, and restrained, high-credibility motion.
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { ArrowRight, Globe, Phone } from "lucide-react";
@@ -15,7 +15,7 @@ type FormState = {
   website: string;
 };
 
-// Google Apps Script Web App endpoint — appends submissions to the CaseJet waitlist sheet.
+// Google Apps Script Web App endpoint - appends submissions to the CaseJet waitlist sheet.
 // The value is read from VITE_WAITLIST_ENDPOINT at build time so it can be rotated without a code change.
 const waitlistEndpoint = import.meta.env.VITE_WAITLIST_ENDPOINT?.trim() ?? "";
 
@@ -130,7 +130,7 @@ export default function Home() {
     null,
   );
 
-  // Hero intro overlay — plays once per session and fades into the landing page.
+  // Hero intro overlay - plays once per session and fades into the landing page.
   const [introVisible, setIntroVisible] = useState<boolean>(() => shouldPlayIntro());
 
   // Lock scroll while the intro is playing so the page underneath stays anchored.
@@ -208,7 +208,7 @@ export default function Home() {
       }
 
       // mode: "no-cors" avoids the CORS preflight that Apps Script endpoints reject.
-      // The response is opaque as a result, so if fetch resolves we treat it as success —
+      // The response is opaque as a result, so if fetch resolves we treat it as success -
       // the Apps Script still writes the row regardless.
       await fetch(waitlistEndpoint, {
         method: "POST",
@@ -397,7 +397,7 @@ export default function Home() {
                     Personal Intelligence Tool summaries that organize treatment history without giving legal advice.
                   </div>
                   <div className="case-panel-soft p-4">
-                    Attorney workflows for extraction, analysis, and demand drafting in the firm’s own voice.
+                    Attorney workflows for extraction, analysis, and demand drafting in the firm's own voice.
                   </div>
                   <div className="case-panel-soft p-4">
                     A launch experience designed to feel measured, factual, and premium from day one.
@@ -412,70 +412,68 @@ export default function Home() {
           <div className="container space-y-6">
             <span className="section-tag">Product paths</span>
             <div className="grid gap-6 lg:grid-cols-2">
-              <article className="case-panel overflow-hidden p-5 sm:p-6">
-                <div className="grid gap-6 xl:grid-cols-[0.92fr_1.08fr] xl:items-center">
-                  <div className="min-h-[500px] rounded-[1.35rem] border border-white/10 overflow-hidden">
-                    <video
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      className="h-full w-full object-cover"
-                      style={{ filter: "brightness(0.7) contrast(1.15)" }}>
-                      <source src={cockpitGridMotion} type="video/mp4" />
-                    </video>
-                  </div>
-                  <div>
-                    <p className="card-label">For individuals</p>
-                    <h3 className="mt-3 max-w-sm font-display text-3xl font-semibold text-white">
-                      <span className="text-[#8ad8ff]">CaseJet.AI</span> brings order to reports, records, and treatment history.
-                    </h3>
-                    <p className="mt-4 text-base leading-7 text-[#cad7e4]">
-                      Upload accident or incident reports plus medical records, then receive a clean factual summary that
-                      makes the story easier to follow. The product is designed to help people understand what happened,
-                      when care occurred, who treated them, and what diagnoses appear in the file.
-                    </p>
-                    <ul className="feature-list mt-5 space-y-3 text-sm leading-6 text-[#dce7f3]">
-                      {personalFeatures.map((feature) => (
-                        <li key={feature}>{feature}</li>
-                      ))}
-                    </ul>
-                    <p className="mt-5 text-sm font-semibold uppercase tracking-[0.18em] text-[#f3cd85]">
-                      No legal advice. Just factual organization.
-                    </p>
-                  </div>
+              <article className="case-panel relative overflow-hidden">
+                <div className="absolute inset-0 -z-10">
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="h-full w-full object-cover"
+                    style={{ filter: "brightness(0.35) contrast(1.15) saturate(0.9)" }}>
+                    <source src={cockpitGridMotion} type="video/mp4" />
+                  </video>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#071019]/90 via-[#071019]/60 to-[#071019]/40" />
+                </div>
+                <div className="relative z-10 p-6 sm:p-8 lg:p-10">
+                  <p className="card-label">For individuals</p>
+                  <h3 className="mt-3 max-w-lg font-display text-3xl font-semibold text-white sm:text-4xl">
+                    <span className="text-[#8ad8ff]">CaseJet.AI</span> brings order to reports, records, and treatment history.
+                  </h3>
+                  <p className="mt-4 max-w-xl text-base leading-7 text-[#cad7e4]">
+                    Upload accident or incident reports plus medical records, then receive a clean factual summary that
+                    makes the story easier to follow. The product is designed to help people understand what happened,
+                    when care occurred, who treated them, and what diagnoses appear in the file.
+                  </p>
+                  <ul className="feature-list mt-5 space-y-3 text-sm leading-6 text-[#dce7f3]">
+                    {personalFeatures.map((feature) => (
+                      <li key={feature}>{feature}</li>
+                    ))}
+                  </ul>
+                  <p className="mt-6 text-sm font-semibold uppercase tracking-[0.18em] text-[#f3cd85]">
+                    No legal advice. Just factual organization.
+                  </p>
                 </div>
               </article>
 
-              <article className="case-panel overflow-hidden p-5 sm:p-6">
-                <div className="grid gap-6 xl:grid-cols-[1.08fr_0.92fr] xl:items-center">
-                  <div>
-                    <p className="card-label">For attorneys</p>
-                    <h3 className="mt-3 max-w-sm font-display text-3xl font-semibold text-white">
-                      Attorney workflows built for extraction, review speed, and strategic drafting.
-                    </h3>
-                    <p className="mt-4 text-base leading-7 text-[#cad7e4]">
-                      CaseJet helps firms handle large medical-record sets with structured extraction and summarization,
-                      then pushes beyond summary into defense-risk analysis and demand drafting support aligned with the
-                      firm’s own style library.
-                    </p>
-                    <ul className="feature-list mt-5 space-y-3 text-sm leading-6 text-[#dce7f3]">
-                      {attorneyFeatures.map((feature) => (
-                        <li key={feature}>{feature}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="min-h-[500px] rounded-[1.35rem] border border-white/10 overflow-hidden">
-                    <video
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      className="h-full w-full object-cover"
-                      style={{ filter: "brightness(0.7) contrast(1.15)" }}>
-                      <source src={cyanCoreMotion} type="video/mp4" />
-                    </video>
-                  </div>
+              <article className="case-panel relative overflow-hidden">
+                <div className="absolute inset-0 -z-10">
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="h-full w-full object-cover"
+                    style={{ filter: "brightness(0.35) contrast(1.15) saturate(0.9)" }}>
+                    <source src={cyanCoreMotion} type="video/mp4" />
+                  </video>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#071019]/90 via-[#071019]/60 to-[#071019]/40" />
+                </div>
+                <div className="relative z-10 p-6 sm:p-8 lg:p-10">
+                  <p className="card-label">For attorneys</p>
+                  <h3 className="mt-3 max-w-lg font-display text-3xl font-semibold text-white sm:text-4xl">
+                    Attorney workflows built for extraction, review speed, and strategic drafting.
+                  </h3>
+                  <p className="mt-4 max-w-xl text-base leading-7 text-[#cad7e4]">
+                    CaseJet helps firms handle large medical-record sets with structured extraction and summarization,
+                    then pushes beyond summary into defense-risk analysis and demand drafting support aligned with the
+                    firm's own style library.
+                  </p>
+                  <ul className="feature-list mt-5 space-y-3 text-sm leading-6 text-[#dce7f3]">
+                    {attorneyFeatures.map((feature) => (
+                      <li key={feature}>{feature}</li>
+                    ))}
+                  </ul>
                 </div>
               </article>
             </div>
@@ -724,7 +722,7 @@ export default function Home() {
                       <textarea
                         className="glow-input min-h-[100px] w-full resize-y px-4 py-3"
                         name="comment"
-                        placeholder="Tell us about your case, what features matter most, or any questions you have…"
+                        placeholder="Tell us about your case, what features matter most, or any questions you have..."
                         value={form.comment}
                         onChange={(event) =>
                           setForm((current) => ({ ...current, comment: event.target.value }))
@@ -732,7 +730,7 @@ export default function Home() {
                         maxLength={1000}
                       />
                       <p className="text-xs text-[#7a8da0]">
-                        Optional — but helps us prioritize what to build first.
+                        Optional - but helps us prioritize what to build first.
                       </p>
                     </label>
 
