@@ -760,9 +760,6 @@ export default function Home() {
                       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                         <div>
                           <p className="font-display text-xl font-semibold text-white">Launch access request</p>
-                          <p className="mt-1 text-sm leading-6 text-[#c7d4e2]">
-                            Secure your spot before we hit founder capacity — early access members lock in the lowest rates.
-                          </p>
                         </div>
                         <button
                           type="submit"
