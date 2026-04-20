@@ -3,6 +3,9 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { ArrowRight, Globe, Phone } from "lucide-react";
 import HeroIntro, { shouldPlayIntro } from "@/components/HeroIntro";
+import WaitlistCounter from "@/components/WaitlistCounter";
+import StickyMobileCTA from "@/components/StickyMobileCTA";
+import ReferralBoost from "@/components/ReferralBoost";
 import { trackWaitlistSignup, trackCTAClick, trackInterestSelect, trackSectionView } from '@/lib/analytics';
 
 type Interest = "Personal Intelligence Tool" | "Attorney";
@@ -129,6 +132,7 @@ export default function Home() {
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; message: string } | null>(
     null,
   );
+  const [submittedEmail, setSubmittedEmail] = useState("");
 
   // Hero intro overlay - plays once per session and fades into the landing page.
   const [introVisible, setIntroVisible] = useState<boolean>(() => shouldPlayIntro());
@@ -217,10 +221,11 @@ export default function Home() {
       });
 
       trackWaitlistSignup(form.interest, 'CaseJet.ai waitlist');
+      setSubmittedEmail(form.email);
       setFeedback({
         type: "success",
         message:
-          "Request sent. You have been added to the CaseJet waitlist, and the launch team can now follow up with early-access details.",
+          "You're in! You've been added to the CaseJet waitlist. Share your referral link below to move up in line.",
       });
       setForm({ fullName: "", email: "", interest: form.interest, comment: "", website: "" });
     } catch {
@@ -237,6 +242,7 @@ export default function Home() {
   return (
     <div className="page-shell min-h-screen text-foreground">
       {introVisible ? <HeroIntro onFinish={() => setIntroVisible(false)} /> : null}
+      <StickyMobileCTA />
       <header className="sticky top-0 z-40 border-b border-white/8 bg-[#071019]/70 backdrop-blur-xl">
         <div className="container flex items-center justify-between gap-4 py-4">
           <a href="#top" className="flex items-center gap-3 text-sm text-white/90 transition hover:text-white">
@@ -323,6 +329,10 @@ export default function Home() {
                   <span className="text-white"> attorney teams</span>. Join now to receive release updates and onboarding
                   details first.
                 </p>
+              </div>
+
+              <div className="mt-6">
+                <WaitlistCounter />
               </div>
             </div>
 
@@ -774,6 +784,10 @@ export default function Home() {
                         {feedback.message}
                       </div>
                     ) : null}
+
+                    {feedback?.type === "success" && submittedEmail && (
+                      <ReferralBoost email={submittedEmail} />
+                    )}
                   </form>
                 </div>
               </div>
