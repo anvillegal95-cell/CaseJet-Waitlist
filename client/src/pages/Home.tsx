@@ -637,17 +637,16 @@ export default function Home() {
                     </p>
                     <div className="mt-8 grid gap-4 sm:grid-cols-2">
                       <div className="case-panel-soft p-4">
-                        <p className="card-label">Current queue</p>
+                        <p className="card-label">Current interest</p>
                         <p className="mt-2 font-display text-xl font-semibold text-white">{teaserLabel}</p>
                         <p className="mt-2 text-sm leading-6 text-[#c7d4e2]">
-                          Choose the audience path that fits your use case and the form will submit that preference.
+                          Select the path that matches your needs — we'll tailor your onboarding experience accordingly.
                         </p>
                       </div>
                       <div className="case-panel-soft p-4">
-                        <p className="card-label">Integration note</p>
+                        <p className="card-label">Why join early</p>
                         <p className="mt-2 text-sm leading-6 text-[#c7d4e2]">
-                          The frontend is ready to send form submissions to a deployed Google Apps Script web app that
-                          appends new entries into Google Sheets.
+                          Founder-tier pricing is locked in for early waitlist members. Once we reach capacity, new accounts start at standard rates.
                         </p>
                       </div>
                     </div>
@@ -752,7 +751,7 @@ export default function Home() {
                         <div>
                           <p className="font-display text-xl font-semibold text-white">Launch access request</p>
                           <p className="mt-1 text-sm leading-6 text-[#c7d4e2]">
-                            Submission target: Google Sheets waitlist via Apps Script endpoint.
+                            Secure your spot before we hit founder capacity — early access members lock in the lowest rates.
                           </p>
                         </div>
                         <button
