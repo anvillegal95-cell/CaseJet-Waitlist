@@ -529,7 +529,7 @@ export default function Home() {
               {/* Scarcity banner */}
               <div className="mt-6 rounded-[1.2rem] border border-[#f1c97b]/24 bg-[#f1c97b]/8 p-4 text-sm leading-6 text-[#f5dfb6]">
                 <span className="font-semibold text-[#f1c97b]">Limited launch:</span>{" "}
-                CaseJet is onboarding only <strong className="text-white">50 firms</strong> at launch to ensure dedicated infrastructure
+                CaseJet is onboarding only <strong className="text-white">30 lawyers</strong> at launch to ensure dedicated infrastructure
                 and hands-on support for every account. Waitlist position determines access order.
               </div>
 
