@@ -35,6 +35,7 @@ The frontend expects a build-time environment variable named **`VITE_WAITLIST_EN
 | `interest` | Either `Personal Intelligence Tool` or `Attorney`. |
 | `source` | Fixed source label: `CaseJet.ai waitlist`. |
 | `submittedAt` | ISO timestamp added by the frontend at submission time. |
+| `comment` | Optional free-text comment or wish list entry from the visitor. |
 | `utm_source` | UTM source parameter from the landing URL, if present. |
 | `utm_medium` | UTM medium parameter from the landing URL, if present. |
 | `utm_campaign` | UTM campaign parameter from the landing URL, if present. |
@@ -45,7 +46,7 @@ The frontend expects a build-time environment variable named **`VITE_WAITLIST_EN
 
 Create a new Google Sheet and rename the first tab to something clear such as **Waitlist**. In the first row, create these headers in order:
 
-`Submitted At | Full Name | Email | Interest | Source | UTM Source | UTM Medium | UTM Campaign | UTM Term | UTM Content`
+`Submitted At | Full Name | Email | Interest | Source | Comment | UTM Source | UTM Medium | UTM Campaign | UTM Term | UTM Content`
 
 ### Step 2: Create the Apps Script project
 
@@ -60,13 +61,14 @@ function doPost(e) {
   const email = e.parameter.email || "";
   const interest = e.parameter.interest || "";
   const source = e.parameter.source || "CaseJet.ai waitlist";
+  const comment = e.parameter.comment || "";
   const utmSource = e.parameter.utm_source || "";
   const utmMedium = e.parameter.utm_medium || "";
   const utmCampaign = e.parameter.utm_campaign || "";
   const utmTerm = e.parameter.utm_term || "";
   const utmContent = e.parameter.utm_content || "";
 
-  sheet.appendRow([submittedAt, fullName, email, interest, source, utmSource, utmMedium, utmCampaign, utmTerm, utmContent]);
+  sheet.appendRow([submittedAt, fullName, email, interest, source, comment, utmSource, utmMedium, utmCampaign, utmTerm, utmContent]);
 
   return ContentService
     .createTextOutput(JSON.stringify({ success: true }))

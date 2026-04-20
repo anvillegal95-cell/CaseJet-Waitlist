@@ -11,6 +11,7 @@ type FormState = {
   fullName: string;
   email: string;
   interest: Interest;
+  comment: string;
   website: string;
 };
 
@@ -121,6 +122,7 @@ export default function Home() {
     fullName: "",
     email: "",
     interest: "Personal Intelligence Tool",
+    comment: "",
     website: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -220,7 +222,7 @@ export default function Home() {
         message:
           "Request sent. You have been added to the CaseJet waitlist, and the launch team can now follow up with early-access details.",
       });
-      setForm({ fullName: "", email: "", interest: form.interest, website: "" });
+      setForm({ fullName: "", email: "", interest: form.interest, comment: "", website: "" });
     } catch {
       setFeedback({
         type: "error",
@@ -716,6 +718,23 @@ export default function Home() {
                         />
                       </label>
                     </div>
+
+                    <label className="space-y-2">
+                      <span className="card-label">What would you most want CaseJet to do for you?</span>
+                      <textarea
+                        className="glow-input min-h-[100px] w-full resize-y px-4 py-3"
+                        name="comment"
+                        placeholder="Tell us about your case, what features matter most, or any questions you have…"
+                        value={form.comment}
+                        onChange={(event) =>
+                          setForm((current) => ({ ...current, comment: event.target.value }))
+                        }
+                        maxLength={1000}
+                      />
+                      <p className="text-xs text-[#7a8da0]">
+                        Optional — but helps us prioritize what to build first.
+                      </p>
+                    </label>
 
                     <input
                       type="text"
