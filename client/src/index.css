@@ -359,6 +359,19 @@
     mix-blend-mode: overlay;
   }
 
+  .animate-pulse-red {
+    animation: pulse-red 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-red {
+    0%, 100% {
+      box-shadow: 0 0 8px rgba(255, 77, 77, 0.15), 0 0 0 1px rgba(255, 77, 77, 0.20);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(255, 77, 77, 0.35), 0 0 0 2px rgba(255, 77, 77, 0.40);
+    }
+  }
+
   @media (min-width: 640px) {
     .container {
       padding-inline: 1.5rem;

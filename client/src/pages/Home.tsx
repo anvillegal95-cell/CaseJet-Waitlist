@@ -535,10 +535,10 @@ export default function Home() {
 
               {/* Competitor comparison row */}
               <div className="mt-8 grid gap-3 md:grid-cols-3">
-                <div className="case-panel-soft p-4">
-                  <p className="card-label">Typical competitor rate</p>
-                  <p className="mt-2 font-display text-2xl font-semibold text-white">$250</p>
-                  <p className="mt-1 text-sm text-[#c9d7e4]">per demand letter</p>
+                <div className="case-panel-soft animate-pulse-red border-[#ff4d4d]/30 bg-[#1a0a0a]/92 p-4">
+                  <p className="card-label text-[#ff6b6b]">Typical competitor rate</p>
+                  <p className="mt-2 font-display text-2xl font-semibold text-[#ff4d4d]">$250</p>
+                  <p className="mt-1 text-sm text-[#e4b8b8]">per demand letter</p>
                 </div>
                 <div className="case-panel-soft border-[#7dd0ff]/24 bg-[#0a1e2c]/92 p-4">
                   <p className="card-label text-[#8fdcff]">Founder-plan effective rate</p>
