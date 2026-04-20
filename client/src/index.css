@@ -299,20 +299,20 @@
 
   .glow-input {
     border-radius: 0.95rem;
-    border: 1px solid rgba(110, 157, 218, 0.28);
-    background: rgba(7, 12, 19, 0.82);
+    border: 1px solid rgba(241, 201, 123, 0.28);
+    background: rgba(26, 22, 15, 0.82);
     color: rgba(241, 248, 255, 0.95);
     transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
   }
 
   .glow-input::placeholder {
-    color: rgba(167, 187, 215, 0.72);
+    color: rgba(197, 173, 130, 0.60);
   }
 
   .glow-input:focus {
     outline: none;
-    border-color: rgba(68, 194, 255, 0.58);
-    box-shadow: 0 0 0 4px rgba(49, 176, 255, 0.14), 0 16px 36px rgba(0, 0, 0, 0.22);
+    border-color: rgba(241, 201, 123, 0.58);
+    box-shadow: 0 0 0 4px rgba(241, 201, 123, 0.14), 0 16px 36px rgba(0, 0, 0, 0.22);
     transform: translateY(-1px);
   }
 
