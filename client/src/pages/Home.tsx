@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { ArrowRight, Globe, Phone } from "lucide-react";
 import HeroIntro, { shouldPlayIntro } from "@/components/HeroIntro";
+import { trackWaitlistSignup, trackCTAClick, trackInterestSelect, trackSectionView } from '@/lib/analytics';
 
 type Interest = "Personal Intelligence Tool" | "Attorney";
 
@@ -104,6 +105,17 @@ const attorneyPlans = [
   },
 ];
 
+/** Extract UTM parameters from the current URL so they can be forwarded to the waitlist sheet. */
+function getUtmParams(): Record<string, string> {
+  const params = new URLSearchParams(window.location.search);
+  const utm: Record<string, string> = {};
+  for (const key of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']) {
+    const val = params.get(key);
+    if (val) utm[key] = val;
+  }
+  return utm;
+}
+
 export default function Home() {
   const [form, setForm] = useState<FormState>({
     fullName: "",
@@ -128,6 +140,28 @@ export default function Home() {
       document.body.style.overflow = previousOverflow;
     };
   }, [introVisible]);
+
+  // Track when users scroll to key sections.
+  useEffect(() => {
+    const ids = ['products', 'pricing', 'waitlist'];
+    const seen = new Set<string>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting && !seen.has(entry.target.id)) {
+            seen.add(entry.target.id);
+            trackSectionView(entry.target.id);
+          }
+        }
+      },
+      { threshold: 0.3 },
+    );
+    for (const id of ids) {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    }
+    return () => observer.disconnect();
+  }, []);
 
   const teaserLabel = useMemo(
     () => (form.interest === "Attorney" ? "Attorney early access queue" : "Personal Intelligence Tool launch queue"),
@@ -165,6 +199,12 @@ export default function Home() {
       payload.set("source", "CaseJet.ai waitlist");
       payload.set("submittedAt", new Date().toISOString());
 
+      // Append UTM parameters so the waitlist sheet captures attribution.
+      const utmParams = getUtmParams();
+      for (const [key, value] of Object.entries(utmParams)) {
+        payload.set(key, value);
+      }
+
       // mode: "no-cors" avoids the CORS preflight that Apps Script endpoints reject.
       // The response is opaque as a result, so if fetch resolves we treat it as success —
       // the Apps Script still writes the row regardless.
@@ -174,6 +214,7 @@ export default function Home() {
         body: payload,
       });
 
+      trackWaitlistSignup(form.interest, 'CaseJet.ai waitlist');
       setFeedback({
         type: "success",
         message:
@@ -214,6 +255,7 @@ export default function Home() {
 
           <a
             href="#waitlist"
+            onClick={() => trackCTAClick('Join Waitlist', 'nav')}
             className="metal-button inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition hover:-translate-y-0.5">
             Join Waitlist
             <ArrowRight className="h-4 w-4" />
@@ -269,6 +311,7 @@ export default function Home() {
               <div className="mt-10 grid gap-4 sm:grid-cols-[auto_1fr] sm:items-center">
                 <a
                   href="#waitlist"
+                  onClick={() => trackCTAClick('Reserve your spot', 'hero')}
                   className="metal-button inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition hover:-translate-y-0.5">
                   Reserve your spot
                   <ArrowRight className="h-4 w-4" />
@@ -620,7 +663,7 @@ export default function Home() {
                             <button
                               key={option}
                               type="button"
-                              onClick={() => setForm((current) => ({ ...current, interest: option }))}
+                              onClick={() => { setForm((current) => ({ ...current, interest: option })); trackInterestSelect(option); }}
                               className={`rounded-2xl border px-4 py-4 text-left transition ${
                                 active
                                   ? "border-[#7fd6ff]/42 bg-[#0d2a3b] text-white shadow-[0_18px_40px_rgba(16,96,150,0.24)]"
