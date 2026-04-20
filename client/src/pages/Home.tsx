@@ -633,7 +633,7 @@ export default function Home() {
                     </h2>
                     <p className="mt-4 max-w-lg text-base leading-7 text-[#ced9e5]">
                       Select the product path you care about, leave your name and email, and the team will keep you
-                      posted as early access opens. This landing page is already wired for a Google Sheets waitlist flow.
+                      posted as early access opens.
                     </p>
                     <div className="mt-8 grid gap-4 sm:grid-cols-2">
                       <div className="case-panel-soft p-4">
